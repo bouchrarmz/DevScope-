@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevScope</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="/page js/validet.js" defer></script>
+</head>
+<body class="bg-gradient-to-r from-slate-950 to-mauve-800">
+    <header class="flex justify-between p-6  border-slate-700 rounded-xl bg-slate-800 m-5 text-olive-50 sticky top-0" >
+        <h1><span class="text-cyan-400">●</span>DevScope</h1>
+        <div class="flex  gap-5">
+            <a href="index.html"  class="text-cyan-400">Recherche</a>
+            <a href="shortlist.html">Shortlist</a>
+        </div>
+    </header>
+
+     <main class="text-center mt-24 px-5">
+
+        <h1 class="text-5xl font-bold text-olive-50">
+            Trouvez les meilleurs
+            <br>
+            développeurs grâce à
+            <span class="text-cyan-400"> leur</span>
+            <br>
+            <span class="text-purple-500">code</span>
+        </h1>
+
+        <p class="text-gray-300 mt-8 text-lg">
+            Analysez un 
+            <span class="text-cyan-400">profil</span>
+             , ses  <span class="text-yellow-400">projets</span>
+              et ses 
+              <span class="text-purple-500"> langages</span> en
+            <br>
+            quelques secondes.
+        </p>
+
+        <form class="flex items-center gap-3 bg-gray-900 p-3 rounded-xl max-w-2xl mx-auto mt-12">
+
+            <input
+                type="text"
+                id="nomsearch"
+                placeholder="Entrez un nom d'utilisateur..."
+                class="flex-1 bg-transparent p-3 outline-none text-slate-500 btn"
+            >
+
+            <button  id="btnsearch" class="bg-gradient-to-r from-cyan-400 to-fuchsia-500 hover:bg-purple-500 p-3 rounded-lg font-bold">
+               <a href="profil.html"> Analyser →</a>
+            </button>
+           <p id="msgerror" class=" text-red-600"></p>
+        </form>
+
+    </main>
+
+</body>
+</html>
