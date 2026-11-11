@@ -5,8 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        
     </head>
-    <body>
+
         <body class="bg-gradient-to-r from-slate-950 to-mauve-800 ">
     <header class="flex justify-between p-6  border-slate-700 rounded-xl bg-slate-800 m-10 text-olive-50  sticky top-0" >
         <h1><span class="text-cyan-400">●</span>DevScope</h1>
@@ -25,7 +26,7 @@
                 class="flex-1 bg-transparent p-3 outline-none text-slate-500"
             >
             <button class="bg-cyan-400 to-fuchsia-500 hover:bg-purple-500 p-3 rounded-lg font-bold">
-               <a href="profil.html">Recherche </a>
+               <!-- <a href="profil.html">Recherche </a> -->
             </button>
         </form>
              <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
@@ -52,7 +53,6 @@
 
                 </div>
 
-                <!-- Statistics -->
                 <div class="grid grid-cols-3 gap-2 mt-5">
 
                     <div class="bg-[#1b2232] rounded-xl p-3">
@@ -101,42 +101,38 @@
                 </div>
 
                
-                <div id="repositories"
-                    class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                     <template id="repoTemplate">
+                
+            <div id="repositories" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
-        <div class="repo-card bg-[#1b2232] border border-gray-700 rounded-2xl p-5 hover:border-cyan-500">
+    <div class="repo-card bg-[#1b2232] border border-gray-700 rounded-2xl p-5 hover:border-cyan-500">
 
-            <h3 class="repo-name text-lg font-bold text-cyan-400"></h3>
+        <h3 id="repoName" class="text-lg font-bold text-cyan-400"></h3>
 
-            <p class="repo-description text-gray-400 mt-4"></p>
+        <p id="repoDescription" class="text-gray-400 mt-4"></p>
 
-            <div class="flex gap-4 mt-5 text-sm text-gray-300">
+        <div class="flex gap-4 mt-5 text-sm text-gray-300">
 
-                <span class="repo-language"></span>
+            <span id="repoLanguage"></span>
 
-                <span class="repo-stars"></span>
+            <span id="repoStars"></span>
 
-                <span class="repo-forks"></span>
-
-            </div>
-
-            <a class="repo-link block mt-5 text-cyan-400"
-               target="_blank">
-                Voir le repository ↗
-            </a>
+            <span id="repoForks"></span>
 
         </div>
 
-    </template>
+        <a id="repoLink" class="block mt-5 text-cyan-400" target="_blank">
+            Voir le repository ↗
+        </a>
 
-                </div>
+    </div>
+
+</div>
 
             </section>
 
         </div>
 
     </main>
-
+<script type="module" src="/page js/pageProfil.js"></script>
     </body>
     </html>
