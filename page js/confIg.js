@@ -1,0 +1,1 @@
+ export const api= 'https://6af4757155a1de7dcf041588.mockapi.io/candidates' ;

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     </head>
 
         <body class="bg-gradient-to-r from-slate-950 to-mauve-800 ">
@@ -22,11 +22,12 @@
 
             <input
                 type="text"
+                id="nomsearch"
                 placeholder="Entrez un nom d'utilisateur..."
                 class="flex-1 bg-transparent p-3 outline-none text-slate-500"
             >
             <button class="bg-cyan-400 to-fuchsia-500 hover:bg-purple-500 p-3 rounded-lg font-bold">
-               <!-- <a href="profil.html">Recherche </a> -->
+               <a href="profil.html">Recherche </a>
             </button>
         </form>
              <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
@@ -73,14 +74,14 @@
                 </div>
 
                 <button id="addShortlist"
-                    class="w-full mt-6 py-4 rounded-xl font-bold bg-gradient-to-r from-cyan-400 to-pink-500">
-                    ★ Ajouter à la shortlist
+                    class="w-full mt-6 py-4 rounded-xl font-bold bg-gradient-to-r from-cyan-400 cusror-pointer to-pink-500 hover:">
+                    <i class="fa-solid fa-star"></i> Ajouter à la shortlist
                 </button>
 
                 <a id="profileLink"
                     href="#"
                     target="_blank"
-                    class="block border border-gray-700 rounded-xl mt-5 p-3 text-cyan-400">
+                    class="block border border-gray-700 rounded-xl mt-5 p-3 text-cyan-400 hover:bg-purple-500">
                     Voir le profil original ↗
                 </a>
 
@@ -102,29 +103,7 @@
 
                
                 
-            <div id="repositories" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-
-    <div class="repo-card bg-[#1b2232] border border-gray-700 rounded-2xl p-5 hover:border-cyan-500">
-
-        <h3 id="repoName" class="text-lg font-bold text-cyan-400"></h3>
-
-        <p id="repoDescription" class="text-gray-400 mt-4"></p>
-
-        <div class="flex gap-4 mt-5 text-sm text-gray-300">
-
-            <span id="repoLanguage"></span>
-
-            <span id="repoStars"></span>
-
-            <span id="repoForks"></span>
-
-        </div>
-
-        <a id="repoLink" class="block mt-5 text-cyan-400" target="_blank">
-            Voir le repository ↗
-        </a>
-
-    </div>
+            <div id="repositories" class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
 </div>
 
