@@ -13,6 +13,7 @@ export async function ajouterShortlist(candidate) {
             throw new Error("Erreur lors de l'ajout du candidat");
         }
         const result = await response.json();
+        
 
         console.log(result);
 
@@ -30,6 +31,7 @@ export async function afficherShortlist() {
         const result = await response.json();
         console.log("eee")
         console.log(result);
+        container.innerHTML = "";
         result.forEach(res => {
             const card = document.createElement("div");
             const rating = Math.max(0, Math.min(5, Number(res.rating) || 0));
@@ -40,7 +42,7 @@ export async function afficherShortlist() {
             bg-[#101321] border border-gray-800
             rounded-3xl p-5 md:p-6
             flex flex-col md:flex-row
-            items-center justify-between gap-5
+            items-center justify-between gap-10
         `;
         card.innerHTML = `
             <div class="flex items-center gap-5 w-full">
@@ -98,7 +100,7 @@ export async function afficherShortlist() {
                     px-4 py-2 rounded-xl"
                     data-action="edit"
                     data-id="${res.id}">
-                    ✎ Modifier
+                     Modifier
                 </button>
 
                 <button

@@ -12,6 +12,7 @@ const following=document.querySelector('#following')
 const usernam=document.querySelector('#username')
 const linkbrofile=document.querySelector('#profileLink')
 const btnaddShortlist=document.querySelector('#addShortlist');
+const msgerror=document.querySelector('#msgerror')
 //repo
 const reposTotal = document.querySelector("#reposTotal");
 const repositories = document.querySelector("#repositories");
@@ -58,23 +59,29 @@ async function rechercherUser(username) {
         Accept: "application/vnd.github+json"
     }
 });
-
-        if (!response.ok) {
-            throw new Error("Utilisateur introuvable");
+          
+        if (response.status === 404) {
+            msgerror.classList.remove("hidden");
+            return;
         }
 
-        const data = await response.json();
+        if (response.status === 403) {
+            console.log("Limite de requêtes GitHub dépassée");
+            return;
+        }
 
-        console.log("dddd");
-        
-        console.log(data);
+        if (!response.ok) {
+            return;
+        }
+        msgerror.classList.add("hidden");
+        const data = await response.json();
         afficherinfo(data);
+        afficherrepo();
 
     } catch (error) {
         console.log(error.message);
     }
 }
-
  async function afficherrepo(){
   try{
  const response= await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=1`,{
@@ -93,15 +100,22 @@ async function rechercherUser(username) {
     title.className = "text-lg font-bold text-cyan-400";
     const description = document.createElement("p");
     description.className = "text-gray-400 mt-4";
-    const link = document.createElement("a");
-    link.href = repo.html_url;
-    link.target = "_blank";
-    link.textContent = "Voir le repository ↗";
 
     title.textContent = repo.name;
     description.textContent = repo.description || "Pas de description";
+     const info= document.createElement('div')
+     info.className = "flex items-center gap-4 mt-3"; 
+    const language = document.createElement("span");
+    language.textContent = `• ${repo.language || "Non précisé"}`;
+    const stars = document.createElement("span");
+    stars.textContent = `★ ${repo.stargazers_count}`;
+    const forks = document.createElement("span");
+    forks.textContent = `⑂ ${repo.forks_count}`; 
+    const updated = document.createElement("p");
+    updated.textContent = `Mis à jour le ${new Date(repo.updated_at).toLocaleDateString("fr-FR")}`;
+    info.append(language, stars, forks);
 
-    card.append(title, description,link);
+    card.append(title, description,info , updated);
 
     repositories.append(card);
 });
@@ -115,7 +129,7 @@ catch (error) {
  rechercherUser(username);
 afficherrepo();
  btnaddShortlist.addEventListener('click', function(){
-
+btnaddShortlist.textContent='conddidat ajouté'
    ajouterShortlist(condidate)
     
 

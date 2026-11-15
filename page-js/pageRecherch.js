@@ -3,6 +3,10 @@ const regexnom = /^[a-zA-Z0-9]([a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$/;
  const errors=document.querySelector('#msgerror')
  const search=document.querySelector('#nomsearch')
 const form=document.querySelector('.form')
+console.log(searchbtn);
+console.log(search);
+console.log(form);
+console.log(errors);
   function validNom(){
     const nom = search.value.trim();
 console.log(nom)
