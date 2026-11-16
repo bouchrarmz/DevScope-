@@ -7,9 +7,9 @@ console.log(searchbtn);
 console.log(search);
 console.log(form);
 console.log(errors);
-  function validNom(){
+export  function validNom(){
     const nom = search.value.trim();
-console.log(nom)
+    console.log(nom)
     if (nom === '') {
         errors.textContent = 'Le champ est vide';
         return false;

@@ -22,6 +22,7 @@ const repoLanguage = document.querySelector("#repoLanguage");
 const repoStars = document.querySelector("#repoStars");
 const repoForks = document.querySelector("#repoForks");
 const repoLink = document.querySelector("#repoLink");
+import { validNom } from './pageRecherch.js'
 import { ajouterShortlist } from './shortlist.js';
 console.log(bio);
  let condidate = null;
@@ -48,6 +49,7 @@ console.log(bio);
     date:user.created_at
 };
  }
+ 
 
  const params = new URLSearchParams(window.location.search);
 const username = params.get('username');
@@ -55,7 +57,7 @@ async function rechercherUser(username) {
     try {
         const response = await fetch(`https://api.github.com/users/${username}`,{
     headers: {
-       
+      
         Accept: "application/vnd.github+json"
     }
 });
@@ -86,6 +88,7 @@ async function rechercherUser(username) {
   try{
  const response= await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=1`,{
     headers: {
+       
         Accept: "application/vnd.github+json"
     }
 })
@@ -134,3 +137,16 @@ btnaddShortlist.textContent='conddidat ajouté'
     
 
 })
+
+const search=document.querySelector('#nomsearch')
+const form=document.querySelector('.form')
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (!validNom()) {
+        return;
+    }
+    const username = search.value.trim();
+
+    window.location.href = `profil.html?username=${username}`;
+});
