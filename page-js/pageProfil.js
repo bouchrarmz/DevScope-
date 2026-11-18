@@ -1,5 +1,4 @@
 
-
  //aside
  const avatar=document.querySelector('#avatar')
 const nameb=document.querySelector('#nameb')
@@ -13,6 +12,8 @@ const usernam=document.querySelector('#username')
 const linkbrofile=document.querySelector('#profileLink')
 const btnaddShortlist=document.querySelector('#addShortlist');
 const msgerror=document.querySelector('#msgerror')
+ const listelangage=document.querySelector('#listelangage')
+   const  serchrepot= document.querySelector('#serchrepot')
 //repo
 const reposTotal = document.querySelector("#reposTotal");
 const repositories = document.querySelector("#repositories");
@@ -22,9 +23,14 @@ const repoLanguage = document.querySelector("#repoLanguage");
 const repoStars = document.querySelector("#repoStars");
 const repoForks = document.querySelector("#repoForks");
 const repoLink = document.querySelector("#repoLink");
+
+
+import { rechercherUser, chargerRepos } from './api.js';
 import { ajouterShortlist } from './shortlist.js';
-console.log(bio);
- let condidate = null;
+
+let repos = [];
+let condidate = null;
+
   export function afficherinfo(user){
     avatar.src= user.avatar_url
     nameb.textContent= user.name
@@ -48,52 +54,13 @@ console.log(bio);
     date:user.created_at
 };
  }
-
  const params = new URLSearchParams(window.location.search);
 const username = params.get('username');
-async function rechercherUser(username) {
-    try {
-        const response = await fetch(`https://api.github.com/users/${username}`,{
-    headers: {
-       
-        Accept: "application/vnd.github+json"
-    }
-});
-          
-        if (response.status === 404) {
-            msgerror.classList.remove("hidden");
-            return;
-        }
 
-        if (response.status === 403) {
-            console.log("Limite de requêtes GitHub dépassée");
-            return;
-        }
-
-        if (!response.ok) {
-            return;
-        }
-        msgerror.classList.add("hidden");
-        const data = await response.json();
-        afficherinfo(data);
-        afficherrepo();
-
-    } catch (error) {
-        console.log(error.message);
-    }
-}
- async function afficherrepo(){
-  try{
- const response= await fetch(`https://api.github.com/users/${username}/repos?per_page=100&page=1`,{
-    headers: {
-        Accept: "application/vnd.github+json"
-    }
-})
- const repo = await response.json();
-    console.log(repo);
-     reposTotal.textContent = repo.length;
-     repo.forEach(repo => {
-
+ async function affichcartrepo(list){
+    repositories.innerHTML = "";
+     reposTotal.textContent = list.length;
+    list.forEach(repo => {
     const card = document.createElement("div");
     card.className = "bg-[#1b2232] border border-gray-700 rounded-2xl p-5 hover:border-cyan-500";
     const title = document.createElement("h3");
@@ -121,16 +88,56 @@ async function rechercherUser(username) {
 });
 
   }
-catch (error) {
-        console.log(error.message);
-    }
 
- }
- rechercherUser(username);
-afficherrepo();
+ 
  btnaddShortlist.addEventListener('click', function(){
 btnaddShortlist.textContent='conddidat ajouté'
    ajouterShortlist(condidate)
     
 
 })
+function filtrerépot(){
+    listelangage.addEventListener('click', (e)=>{
+       
+    const  lang= e.target.closest(".filter")
+    if(lang){
+        const language =lang.dataset.lang
+        const repfilter = repos.filter(rep =>
+    language === "TOUT" || rep.language === language
+);
+affichcartrepo(repfilter);
+
+    }
+
+    })
+}
+async function initialiserProfil() {
+    try {
+        const user = await rechercherUser(username);
+        afficherinfo(user);
+
+        repos = await chargerRepos(username);
+        affichcartrepo(repos);
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+filtrerépot()
+let language = "TOUT";
+
+function recherchrepot(){
+
+    console.log(serchrepot.value)
+    const serch=serchrepot.value.toLowerCase()
+    const  repsearch= repos.filter((rep)=>
+     rep.name.toLowerCase().includes(serch)&& 
+     (language === "TOUT" || rep.language === language)
+    
+    )
+     console.log(repsearch)
+     affichcartrepo(repsearch)
+}
+filtrerépot();
+initialiserProfil();
+serchrepot.addEventListener('input', recherchrepot);

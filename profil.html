@@ -1,44 +1,38 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
 
-        <body class="bg-gradient-to-r from-slate-950 to-mauve-800 ">
-    <header class="flex justify-between p-6  border-slate-700 rounded-xl bg-slate-800 m-10 text-olive-50  sticky top-0" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-r from-slate-950 to-mauve-800 ">
+    <header class="flex justify-between p-6  border-slate-700 rounded-xl bg-slate-800 m-10 text-olive-50  sticky top-0">
         <h1><span class="text-cyan-400">●</span>DevScope</h1>
         <div class="flex  gap-5">
             <a href="index.html" class="text-cyan-400">Recherche</a>
-            <a href="shortlist.html" >Shortlist</a>
+            <a href="shortlist.html">Shortlist</a>
         </div>
     </header>
-    
+
     <main>
         <form class="flex items-center gap-3 bg-gray-900 p-3 rounded-xl max-w-2xl mx-auto mt-12">
 
-            <input
-                type="text"
-                id="nomsearch"
-                placeholder="Entrez un nom d'utilisateur..."
-                class="flex-1 bg-transparent p-3 outline-none text-slate-500"
-            >
+            <input type="text" id="nomsearch" placeholder="Entrez un nom d'utilisateur..."
+                class="flex-1 bg-transparent p-3 outline-none text-slate-500">
             <button class="bg-cyan-400 to-fuchsia-500 hover:bg-purple-500 p-3 rounded-lg font-bold ">
-               <a href="profil.html">Recherche </a>
+                <a href="profil.html">Recherche </a>
             </button>
         </form>
-             <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
 
             <section class="bg-[#111827] border border-gray-800 rounded-2xl p-7 text-center">
 
-                <img
-                    id="avatar"
-                    src=""
-                    class="w-32 h-32 rounded-full mx-auto border-4 border-cyan-400 mb-6 object-cover"
-                >
+                <img id="avatar" src=""
+                    class="w-32 h-32 rounded-full mx-auto border-4 border-cyan-400 mb-6 object-cover">
 
                 <h2 id="nameb" class="text-2xl font-bold"></h2>
 
@@ -78,58 +72,70 @@
                     <i class="fa-solid fa-star"></i> Ajouter à la shortlist
                 </button>
 
-                <a id="profileLink"
-                    href="#"
-                    target="_blank"
+                <a id="profileLink" href="#" target="_blank"
                     class="block border border-gray-700 rounded-xl mt-5 p-3 text-cyan-400 hover:bg-pink-500">
                     Voir le profil original ↗
                 </a>
 
             </section>
 
-          
+
             <section class="md:col-span-2 bg-[#111827] border border-gray-800 rounded-2xl p-6">
 
                 <div class="flex items-center gap-4 mb-7">
 
                     <h2 class="text-2xl font-bold">Dépôts</h2>
 
-                    <span id="reposTotal"
-                        class="bg-cyan-950 text-cyan-400 px-3 py-1 rounded-full text-sm">
+                    <span id="reposTotal" class="bg-cyan-950 text-cyan-400 px-3 py-1 rounded-full text-sm">
                         0
                     </span>
 
                 </div>
 
-               
-                
-            <div id="repositories" class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-</div>
+                <section>
+                    <div class="flex p-6 justify-between">
+                        <ul id="listelangage" class="border-slate-700 rounded-xl flex gap-5 bg-gray-900 p-3 text-olive-50">
+                            <li class="filter" data-lang="TOUT">tout</li>
+                            <li class="filter" data-lang="Java">java</li>
+                            <li class="filter" data-lang="JavaScript">javascript</li>
+                            <li class="filter" data-lang="HTML">html</li>
+                            <li class="filter" data-lang="CSS">css</li>
+                            <li class="filter" data-lang="PHP">php</li>
+                        </ul>
+                        <div class="border-slate-700 rounded-xl w-xl bg-slate-800">
+                            <input type="text" id="serchrepot" placeholder="Entrez le  nom  de dépote"
+                                class="flex-1 bg-transparent p-3 outline-none text-slate-500">
+                        </div>
+                    </div>
+                    <div id="repositories" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    </div>
+                </section>
 
             </section>
 
         </div>
 
     </main>
-    <div id="msgerror"
-     class="hidden flex flex-col items-center justify-center
+    <div id="msgerror" class="hidden flex flex-col items-center justify-center
             min-h-[317px] bg-[#0d1020] border border-[#25283a]
             rounded-3xl p-8 text-center">
 
-    <div class="w-20 h-20 rounded-full border border-rose-500
+        <div class="w-20 h-20 rounded-full border border-rose-500
                 flex items-center justify-center text-rose-500
                 text-3xl shadow-[0_0_25px_rgba(244,63,94,0.2)] mb-7">
-        !
+            !
+        </div>
+
+        <p class="text-white text-xl font-bold max-w-md leading-9">
+            Aucun développeur trouvé. Vérifiez le nom
+            d'utilisateur et réessayez.
+        </p>
+
     </div>
+    <script type="module" src="/page-js/pageProfil.js"></script>
 
-    <p class="text-white text-xl font-bold max-w-md leading-9">
-        Aucun développeur trouvé. Vérifiez le nom
-        d'utilisateur et réessayez.
-    </p>
+</body>
 
-</div>
-<script type="module" src="/page-js/pageProfil.js"></script>
-
-    </body>
-    </html>
+</html>

@@ -37,7 +37,129 @@
         <section class="container ">
             
         </section>
-    </div>      
+    </div>    
+    <div id="modalModification"
+     class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 hidden">
+
+  <div class="w-full max-w-xl rounded-2xl border border-slate-700/80 
+              bg-slate-900 shadow-2xl shadow-purple-950/30 overflow-hidden">
+
+    <div class="flex items-center justify-between border-b border-slate-800 p-5">
+      <div class="flex items-center gap-3">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl 
+                    bg-gradient-to-br from-cyan-400/20 to-purple-500/20 
+                    text-cyan-300">
+          <i class="fa-solid fa-user-pen text-lg"></i>
+        </div>
+
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-cyan-400">
+            Gestion du candidat
+          </p>
+          <h2 class="mt-1 text-lg font-bold text-white">
+            Modifier le profil
+          </h2>
+        </div>
+      </div>
+      <button id="fermerModal"
+              type="button"
+              aria-label="Fermer"
+              class="flex h-9 w-9 items-center justify-center rounded-lg 
+                     text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <!-- Form -->
+    <form id="formModification" class="space-y-5 p-5">
+
+      <!-- Candidate name -->
+      <div class="rounded-xl bg-slate-800/60 p-3">
+        <p class="text-xs text-slate-400 mb-1">Candidat sélectionné</p>
+        <p id="nomCandidatModal" class="font-semibold text-white">
+          
+        </p>
+      </div>
+
+      <!-- Status + rating -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <div>
+          <label for="statutCandidat"
+                 class="mb-2 block text-sm font-medium text-slate-300">
+            Statut de recrutement
+          </label>
+
+          <select id="statutCandidat"
+                  class="w-full rounded-xl border border-slate-700 bg-slate-800 
+                         p-3 text-sm text-white outline-none 
+                         focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/10">
+            <option value="À contacter">À contacter</option>
+            <option value="Entretien">Entretien</option>
+            <option value="Retenu">Retenu</option>
+            <option value="Refusé">Refusé</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="noteCandidat"
+                 class="mb-2 block text-sm font-medium text-slate-300">
+            Évaluation
+          </label>
+
+          <select id="noteCandidat"
+                  class="w-full rounded-xl border border-slate-700 bg-slate-800 
+                         p-3 text-sm text-white outline-none 
+                         focus:border-purple-400 focus:ring-2 focus:ring-purple-400/10">
+            <option value="1">★☆☆☆☆ — 1 / 5</option>
+            <option value="2">★★☆☆☆ — 2 / 5</option>
+            <option value="3">★★★☆☆ — 3 / 5</option>
+            <option value="4">★★★★☆ — 4 / 5</option>
+            <option value="5">★★★★★ — 5 / 5</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label for="commentaireCandidat"
+               class="mb-2 block text-sm font-medium text-slate-300">
+          Note interne
+        </label>
+
+        <textarea id="commentaireCandidat"
+                  rows="4"
+                  placeholder="Ajouter un commentaire sur ce candidat..."
+                  class="w-full resize-none rounded-xl border border-slate-700 
+                         bg-slate-800 p-4 text-sm text-white placeholder:text-slate-500
+                         outline-none focus:border-purple-400 transition"></textarea>
+
+        <p class="mt-1 text-xs text-slate-500">
+          Ce commentaire est destiné au suivi interne du recrutement.
+        </p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-2">
+
+        <button id="annulerModification"
+                type="button"
+                class="rounded-xl border border-slate-700 px-5 py-3 
+                       text-sm font-medium text-slate-300 hover:bg-slate-800 transition">
+          Annuler
+        </button>
+
+        <button id="enregistrerModification"
+                type="submit"
+                class="rounded-xl bg-gradient-to-r from-cyan-400 to-purple-500 
+                       px-6 py-3 text-sm font-bold text-white 
+                       shadow-lg shadow-purple-500/10 hover:opacity-90 transition">
+          <i class="fa-solid fa-check mr-2"></i>
+          Enregistrer les modifications
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>  
     </main>
 
     <script type="module" src="./page-js/shortlist.js"></script>
