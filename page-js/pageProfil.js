@@ -27,7 +27,7 @@ const repoLink = document.querySelector("#repoLink");
 
 import { rechercherUser,chargerRepos } from './api.js';
 import { getCache, setCache } from './cache.js'
-import { ajouterShortlist } from './shortlist.js';
+import { ajouterShortlist } from './ajouteShortList.js';
 
 const params = new URLSearchParams(window.location.search);
 const username = params.get('username');
