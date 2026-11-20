@@ -18,7 +18,7 @@ const annulerSuppression = document.querySelector('#annulerSuppression');
 const confirmerSuppression = document.querySelector('#confirmerSuppression');
 let idASup = null;
  let id=null
- export async function afficherShortlist() {
+ export async function afficherShortlist(listeCandidats ) {
     
       try {
          const response = await fetch(api);
@@ -31,7 +31,9 @@ let idASup = null;
          console.log("eee")
          console.log(result);
          container.innerHTML = "";
-         result.forEach(res => {
+
+const listeAAfficher = listeCandidats || candidats;
+         listeAAfficher.forEach(res => {
              const card = document.createElement("div");
              const rating = Math.max(0, Math.min(5, Number(res.rating) || 0));
               const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
@@ -174,8 +176,12 @@ annulerSuppression.addEventListener('click' , async function(){
  })
  confirmerSuppression.addEventListener('click',async()=>{
     console.log('suppreme')
+    const btnSupprimer = container.querySelector(
+        `[data-action="delete"][data-id="${idASup}"]`)
  try {
         console.log('suppreme');
+         btnSupprimer.disabled = true;
+        btnSupprimer.classList.add('opacity-50', 'cursor-not-allowed');
 
         await deletC(idASup);
 
@@ -187,6 +193,8 @@ annulerSuppression.addEventListener('click' , async function(){
 
     } catch(error) {
         console.log(error.message);
+         btnSupprimer.disabled = false;
+        btnSupprimer.classList.remove('opacity-50', 'cursor-not-allowed');
     }
     //   const condidtsup=candidats.filter((c)=> c.id!==id )
     //   afficherShortlist(condidtsup)
@@ -198,7 +206,7 @@ function rechercheuser(){
     console.log(nomsearch.value)
     const serch=nomsearch.value.toLowerCase()
     const  usersearch= candidats.filter((user)=>
-     user.name.toLowerCase().includes(serch)&& 
+     (user.name || "").toLowerCase().includes(serch)&& 
      (status==="TOUT" ||user.status === status)
     
  )
@@ -212,12 +220,14 @@ function filtrsatutus(){
     const  statut= e.target.closest(".filter")
     if(statut){
         status=statut.dataset.st
+         console.log("Status sélectionné :", status);
+            console.log("Status des candidats :", candidats.map(c => c.status));
+
             rechercheuser()
     }
     })
 }
 filtrsatutus();
-
 nomsearch.addEventListener('input',rechercheuser);
 
 
