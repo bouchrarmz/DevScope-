@@ -1,4 +1,4 @@
-import { ajouterShortlist } from './ajouteShortList.js';
+
 import { api } from './confIg.js';
 import{modifierC, deletC} from './api.js'
 let candidats = [];
@@ -21,17 +21,14 @@ let idASup = null;
  export async function afficherShortlist(listeCandidats ) {
     
       try {
-         const response = await fetch(api);
-         if (!response.ok) {
-             throw new Error("Erreur lors de l'ajout du candidat");
-         }
-         console.log(response.ok)
-         const result = await response.json();
-         candidats = result
-         console.log("eee")
-         console.log(result);
-         container.innerHTML = "";
+        if (candidats.length === 0) {
+    const response = await fetch(api);
 
+    if (!response.ok) {
+        throw new Error("Erreur lors du chargement");
+    }
+    candidats = await response.json();
+}
 const listeAAfficher = listeCandidats || candidats;
          listeAAfficher.forEach(res => {
              const card = document.createElement("div");

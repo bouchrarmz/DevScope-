@@ -76,6 +76,16 @@ let condidate = null;
  async function affichcartrepo(repos){
     repositories.innerHTML = "";
      reposTotal.textContent = repos.length;
+     if (repos.length === 0) {
+    const message = document.createElement("p");
+
+    message.textContent = "Aucun dépôt trouvé";
+
+    message.className = "text-gray-400 text-center py-8";
+
+    repositories.append(message);
+    return;
+}
     repos.forEach(repo => {
     const card = document.createElement("div");
     card.className = "bg-[#1b2232] border border-gray-700 rounded-2xl p-5 hover:border-cyan-500";
