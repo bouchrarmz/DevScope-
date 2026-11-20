@@ -58,15 +58,14 @@ DevScope/
 ├── profil.html
 ├── shortlist.html
 │
-├── js/
+├── page-js/
 │   ├── config.js
 │   ├── api.js
 │   ├── cache.js
 │   ├── utils.js
-│   ├── states.js
-│   ├── search.js
-│   ├── profile.js
-│   └── shortlist.js
+│   ├── pagerecherch.js
+│   ├── pageprofile.js
+│   └── pageshortlist.js
 │
 └── README.md
 ```
