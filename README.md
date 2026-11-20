@@ -1,52 +1,53 @@
-# DevScope-
-# DevScope – Application de recrutement Tech
+# DevScope V2 
 
 ## Présentation du projet
 
-DevScope est une application web destinée aux recruteurs dans le domaine de la technologie. Elle permet de rechercher des développeurs à partir de leurs profils GitHub publics, de consulter leurs informations et leurs dépôts, puis d'ajouter les candidats intéressants à une shortlist.
+**DevScope** est une application web destinée aux recruteurs pour rechercher des développeurs sur GitHub, consulter leurs profils et gérer une shortlist de candidats.
 
-L'objectif est de faciliter le processus de recrutement et de centraliser le suivi des candidats dans une seule application.
+La version 2 apporte de nouvelles fonctionnalités pour faciliter le suivi des candidats, la recherche de dépôts et améliorer les performances grâce au système de cache.
 
-## Fonctionnalités principales
+## Fonctionnalités
 
-### 1. Page Recherche
-- Recherche d'un développeur par son nom d'utilisateur GitHub.
-- Validation du nom d'utilisateur avant l'envoi de la requête.
-- Affichage des messages d'erreur en cas de nom invalide ou inexistant.
-- Redirection vers la page Profil après une recherche réussie.
+### 1. Recherche de développeurs
+- Rechercher un développeur par son nom d'utilisateur GitHub.
+- Consulter les informations de son profil.
+- Afficher ses statistiques et ses dépôts publics.
 
-### 2. Page Profil
-- Affichage de la photo du développeur.
-- Affichage du nom, login, biographie et localisation.
-- Affichage de la date d'inscription.
-- Affichage du nombre de dépôts, abonnés et abonnements.
-- Lien vers le profil GitHub.
-- Affichage des dépôts sous forme de cartes avec :
-  - Nom du dépôt.
-  - Description.
-  - Langage utilisé.
-  - Nombre d'étoiles.
-  - Nombre de forks.
-  - Date de dernière mise à jour.
-- Possibilité d'ajouter le développeur à la shortlist sans doublon.
+### 2. Gestion de la shortlist
+- Ajouter un candidat à la shortlist.
+- Modifier le statut du candidat :
+  - À contacter
+  - Entretien
+  - Retenu
+  - Refusé
+- Modifier la note sur 5.
+- Ajouter un commentaire.
+- Supprimer un candidat après confirmation.
+- Rechercher et filtrer les candidats par statut.
 
-### 3. Page Shortlist
-- Affichage des candidats enregistrés.
-- Affichage du nombre total de candidats.
-- Recherche par nom ou login.
-- Tri des candidats par nom ou date d'ajout.
-- Récupération des candidats depuis MockAPI.
+### 3. Recherche et filtre des dépôts
+- Rechercher un dépôt par son nom.
+- Filtrer les dépôts par langage de programmation.
+- Combiner la recherche et le filtre.
+- Afficher un message lorsqu'aucun dépôt ne correspond.
+
+### 4. Optimisation des performances
+- Mise en place d'un système de cache avec `localStorage`.
+- Conservation des profils consultés pendant 10 minutes.
+- Chargement du profil et des dépôts en parallèle avec `Promise.all`.
+- Réduction des requêtes répétées vers l'API GitHub.
 
 ## Technologies utilisées
 
 - HTML5
+- CSS3
 - Tailwind CSS
 - JavaScript ES6+
-- GitHub REST API
-- MockAPI (REST API)
+- GitHub API
+- MockAPI
+- LocalStorage
 - Fetch API
-- LocalStorage si utilisé dans le projet
-- Git et GitHub
+- Git & GitHub
 
 ## Architecture du projet
 
@@ -60,6 +61,7 @@ DevScope/
 ├── js/
 │   ├── config.js
 │   ├── api.js
+│   ├── cache.js
 │   ├── utils.js
 │   ├── states.js
 │   ├── search.js
@@ -69,43 +71,37 @@ DevScope/
 └── README.md
 ```
 
-### Organisation des modules
+## Installation et utilisation
 
-- **config.js :** configuration des API et constantes.
-- **api.js :** gestion des requêtes HTTP avec fetch.
-- **utils.js :** fonctions utilitaires et validation.
-- **states.js :** gestion des états de l'application.
-- **search.js :** logique de recherche et validation du username.
-- **profile.js :** affichage du profil et des dépôts GitHub.
-- **shortlist.js :** gestion des candidats, recherche et tri.
+1. Cloner le dépôt GitHub :
 
-## Communication avec les API
+```bash
+git clone URL_DU_DEPOT
+```
 
-L'application utilise deux API :
+2. Ouvrir le dossier du projet.
 
-**GitHub API :** récupération des profils et des dépôts publics des développeurs.
+3. Lancer le fichier `index.html` avec Live Server.
 
-**MockAPI :** enregistrement et récupération des candidats de la shortlist.
+4. Rechercher un développeur avec son nom d'utilisateur GitHub.
 
-Les requêtes sont réalisées avec fetch, async/await et try/catch. Les réponses HTTP sont vérifiées avec response.ok afin de gérer les erreurs.
+5. Consulter son profil et ajouter le candidat à la shortlist.
 
-## Installation et lancement
+## APIs utilisées
 
-1. Cloner le dépôt GitHub.
-2. Ouvrir le projet dans Visual Studio Code.
-3. Installer l'extension Live Server si nécessaire.
-4. Lancer `index.html` avec Live Server.
+**GitHub API :** récupération des profils publics et des dépôts.
 
-## Déploiement
+**MockAPI :** stockage et gestion des candidats dans la shortlist avec les opérations POST, GET, PUT et DELETE.
 
-L'application est destinée à être déployée sur GitHub Pages.
+## Version
 
-## Liens du projet
-
-- GitHub : À compléter
-- Application en ligne : À compléter
-- Jira : À compléter
+- Version 1.0 : première version de l'application.
+- Version 2.0 : ajout de la modification et suppression des candidats, recherche et filtre des dépôts et système de cache.
 
 ## Auteur
 
-Projet réalisé dans le cadre d'un brief de développement Front-End – DevScope.
+**Bouchra Ramzi**
+
+Projet réalisé dans le cadre de la formation Développement Digital – Full Stack à YouCode.
+---
+**DevScope V2 – Simplifier le recrutement des développeurs.**
