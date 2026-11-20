@@ -22,13 +22,35 @@
       <h1 class="font-bold text-3xl text-cyan-400 p-6">Ma shortlist</h1>
       <!-- <p class="total"></p> -->
       <div class="flex p-6 justify-between">
-        <ul id="liste" class=" border-slate-700 rounded-xl flex gap-5 bg-gray-900 p-3 text-olive-50">
-          <li class="filter bg-gradient-to-r from-cyan-400 to-fuchsia-500  p-1 rounded-lg" data-st="TOUT">tout</li>
-          <li class="filter" data-st="À contacter">À contacter</li>
-          <li class="filter" data-st="Entretien">Entretien</li>
-          <li class="filter" data-st="Retenu">Retenu </li>
-          <li class="filter" data-st="Refusé">Refusé</li>
-        </ul>
+        <ul id="liste" class="border-slate-700 rounded-xl flex gap-5 bg-gray-900 p-3 text-olive-50">
+
+    <li tabindex="0"
+         class="filter cursor-pointer rounded-lg p-2 focus:bg-fuchsia-600"
+        data-st="TOUT">
+        Tout
+    </li>
+
+    <li tabindex="0" class="filter cursor-pointer rounded-lg p-2 focus:bg-fuchsia-600"
+        data-st="À contacter">
+        À contacter
+    </li>
+
+    <li tabindex="0" class="filter cursor-pointer rounded-lg p-2 focus:bg-fuchsia-600"
+        data-st="Entretien">
+        Entretien
+    </li>
+
+    <li tabindex="0" class="filter cursor-pointer rounded-lg p-2 focus:bg-fuchsia-600"
+        data-st="Retenu">
+        Retenu
+    </li>
+
+    <li tabindex="0" class="filter cursor-pointer rounded-lg p-2 focus:bg-fuchsia-600"
+        data-st="Refusé">
+        Refusé
+    </li>
+
+</ul>
         <div class="border-slate-700 rounded-xl w-xl bg-slate-800">
           <input type="text" id="inputnom" placeholder="Entrez un nom d'utilisateur..."
             class="flex-1 bg-transparent p-3 outline-none text-slate-500">

@@ -20,16 +20,19 @@ let idASup = null;
  let id=null
  export async function afficherShortlist(listeCandidats ) {
     
-      try {
-        if (candidats.length === 0) {
-    const response = await fetch(api);
+        try {
+        const response = await fetch(api);
 
-    if (!response.ok) {
-        throw new Error("Erreur lors du chargement");
-    }
-    candidats = await response.json();
-}
-const listeAAfficher = listeCandidats || candidats;
+        if (!response.ok) {
+            throw new Error("Erreur lors du chargement");
+        }
+
+        candidats = await response.json();
+
+        container.innerHTML = "";
+
+        const listeAAfficher = listeCandidats || candidats;
+
          listeAAfficher.forEach(res => {
              const card = document.createElement("div");
              const rating = Math.max(0, Math.min(5, Number(res.rating) || 0));
