@@ -4,6 +4,7 @@ import{modifierC, deletC} from './api.js'
 let candidats = [];
 let candidatAModifier = null;
  const container=document.querySelector('#section')
+ const nomsearch=document.querySelector('#inputnom')
 // Modificatio et suppresion
 const annulerM=document.querySelector('#annulerModification')
 const enregistrerM=document.querySelector('#enregistrerModification')
@@ -18,6 +19,7 @@ const confirmerSuppression = document.querySelector('#confirmerSuppression');
 let idASup = null;
  let id=null
  export async function afficherShortlist() {
+    
       try {
          const response = await fetch(api);
          if (!response.ok) {
@@ -53,7 +55,6 @@ let idASup = null;
                      <h3 class="text-white text-xl font-bold">
                          ${res.name}
                      </h3>
- 
                      <div class="flex items-center gap-3 mt-1">
  
                          <span class="text-gray-400 text-sm">
@@ -191,4 +192,32 @@ annulerSuppression.addEventListener('click' , async function(){
     //   afficherShortlist(condidtsup)
     //   deletC(idASup)
  })
+ let status = "TOUT";
+function rechercheuser(){
+
+    console.log(nomsearch.value)
+    const serch=nomsearch.value.toLowerCase()
+    const  usersearch= candidats.filter((user)=>
+     user.name.toLowerCase().includes(serch)&& 
+     (status==="TOUT" ||user.status === status)
+    
+ )
+     console.log(usersearch)
+    afficherShortlist(usersearch)
+}
+ const liste=document.querySelector('#liste')
+function filtrsatutus(){
+    liste.addEventListener('click', (e)=>{
+       
+    const  statut= e.target.closest(".filter")
+    if(statut){
+        status=statut.dataset.st
+            rechercheuser()
+    }
+    })
+}
+filtrsatutus();
+
+nomsearch.addEventListener('input',rechercheuser);
+
 

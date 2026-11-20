@@ -16,7 +16,6 @@ const api_URL='https://6af4757155a1de7dcf041588.mockapi.io/candidates'
 export async function chargerRepos(username) {
     const response = await fetch(
         `https://api.github.com/users/${username}/repos?per_page=100&page=1`,
-        
     );
 
     if (!response.ok) {
