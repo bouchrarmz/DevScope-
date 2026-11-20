@@ -25,13 +25,30 @@ const repoForks = document.querySelector("#repoForks");
 const repoLink = document.querySelector("#repoLink");
 
 
-import { rechercherUser, chargerRepos } from './api.js';
+import { rechercherUser,chargerRepos } from './api.js';
+import { getCache, setCache } from './cache.js'
 import { ajouterShortlist } from './shortlist.js';
+
+const params = new URLSearchParams(window.location.search);
+const username = params.get('username');
 
 let repos = [];
 let condidate = null;
 
-  export function afficherinfo(user){
+ export async  function afficherinfo(){
+    if (!username)return
+    let data = getCache(username)
+    if(!data || !data.user){
+        const results = await Promise.all([rechercherUser(username),chargerRepos(username)])
+        const user = results[0];
+        repos = results[1];
+        if(!user)return;
+        data={user,repos}
+        setCache(username,data);
+    }
+
+    const user = data.user;
+    repos = data.repos
     avatar.src= user.avatar_url
     nameb.textContent= user.name
     usernam.textContent=user.login
@@ -54,13 +71,12 @@ let condidate = null;
     date:user.created_at
 };
  }
- const params = new URLSearchParams(window.location.search);
-const username = params.get('username');
 
- async function affichcartrepo(list){
+
+ async function affichcartrepo(repos){
     repositories.innerHTML = "";
-     reposTotal.textContent = list.length;
-    list.forEach(repo => {
+     reposTotal.textContent = repos.length;
+    repos.forEach(repo => {
     const card = document.createElement("div");
     card.className = "bg-[#1b2232] border border-gray-700 rounded-2xl p-5 hover:border-cyan-500";
     const title = document.createElement("h3");
@@ -93,39 +109,14 @@ const username = params.get('username');
  btnaddShortlist.addEventListener('click', function(){
 btnaddShortlist.textContent='conddidat ajouté'
    ajouterShortlist(condidate)
-    
-
 })
-function filtrerépot(){
-    listelangage.addEventListener('click', (e)=>{
-       
-    const  lang= e.target.closest(".filter")
-    if(lang){
-        const language =lang.dataset.lang
-        const repfilter = repos.filter(rep =>
-    language === "TOUT" || rep.language === language
-);
-affichcartrepo(repfilter);
 
-    }
-
-    })
-}
 async function initialiserProfil() {
-    try {
-        const user = await rechercherUser(username);
-        afficherinfo(user);
 
-        repos = await chargerRepos(username);
+        await afficherinfo()
         affichcartrepo(repos);
-
-    } catch (error) {
-        console.log(error.message);
-    }
 }
-filtrerépot()
 let language = "TOUT";
-
 function recherchrepot(){
 
     console.log(serchrepot.value)
@@ -138,6 +129,16 @@ function recherchrepot(){
      console.log(repsearch)
      affichcartrepo(repsearch)
 }
+function filtrerépot(){
+    listelangage.addEventListener('click', (e)=>{
+       
+    const  lang= e.target.closest(".filter")
+    if(lang){
+         language =lang.dataset.lang
+             recherchrepot()
+    }
+    })
+}
 filtrerépot();
-initialiserProfil();
+initialiserProfil()
 serchrepot.addEventListener('input', recherchrepot);

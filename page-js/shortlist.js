@@ -1,5 +1,10 @@
 import { api } from './confIg.js';
-const container= document.querySelector('.container')
+import{modifierC, deletC} from './api.js'
+let candidats = [];
+let candidatAModifier = null;
+const container= document.querySelector("#section");
+console.log(container);
+
 export async function ajouterShortlist(candidate) {
      try {
         const response = await fetch(api, {
@@ -29,6 +34,7 @@ export async function afficherShortlist() {
         }
         console.log(response.ok)
         const result = await response.json();
+        candidats = result
         console.log("eee")
         console.log(result);
         container.innerHTML = "";
@@ -43,6 +49,7 @@ export async function afficherShortlist() {
             rounded-3xl p-5 md:p-6
             flex flex-col md:flex-row
             items-center justify-between gap-10
+            card
         `;
         card.innerHTML = `
             <div class="flex items-center gap-5 w-full">
@@ -97,12 +104,11 @@ export async function afficherShortlist() {
 
                 <button
                     class="border border-cyan-700 text-cyan-400
-                    px-4 py-2 rounded-xl"
+                    px-4 py-2 rounded-xl edit"
                     data-action="edit"
                     data-id="${res.id}">
                      Modifier
                 </button>
-
                 <button
                     class="border border-red-500 text-red-400
                     px-4 py-2 rounded-xl"
@@ -110,18 +116,103 @@ export async function afficherShortlist() {
                     data-id="${res.id}">
                     ✕ Supprimer
                 </button>
-
             </div>
+            
         `;
-
         container.appendChild(card);
 
     });
             
-        
-
     } catch (error) {
         console.log(error.message);
     }
 }
  afficherShortlist()
+// Modificatio et suppresion
+const annulerM=document.querySelector('#annulerModification')
+const enregistrerM=document.querySelector('#enregistrerModification')
+const modal=document.querySelector('#modalModification')
+ const nomCandidatModal=document.querySelector('#nomCandidatModal')
+  const statutCandidat=document.querySelector('#statutCandidat')
+const  noteCandidat=document.querySelector('#noteCandidat')
+ const commentaireC=document.querySelector('#commentaireCandidat')
+ const modalSuppression = document.querySelector('#modalSuppression');
+const annulerSuppression = document.querySelector('#annulerSuppression');
+const confirmerSuppression = document.querySelector('#confirmerSuppression');
+let idASup = null;
+ let id=null
+function modifercondidat(candidats){
+   nomCandidatModal.textContent= candidats.name
+   statutCandidat.value= candidats.status
+   noteCandidat.value= candidats.rating
+   commentaireC.value= candidats.note
+}
+ container.addEventListener('click',function(e){
+   const btnclick= e.target.closest('[data-action="edit"]')
+   const btnclickd = e.target.closest('[data-action="delete"]')
+   
+   console.log('hi im btnedit')
+   if(btnclick){
+     id =btnclick.dataset.id;
+     candidatAModifier = candidats.find((c)=>String(c.id)===id )
+   console.log(candidatAModifier);
+   if(candidatAModifier){
+   modal.classList.remove('hidden');
+    modifercondidat(candidatAModifier);}
+   }
+   if(btnclickd ){
+    idASup =  btnclickd.dataset.id ;
+     modalSuppression.classList.remove('hidden');
+   }
+ })
+ enregistrerM.addEventListener('click', async function(e){
+    e.preventDefault()
+   const candidatModifie = {
+        ...candidatAModifier,
+        status: statutCandidat.value,
+        rating: Number(noteCandidat.value),
+        note: commentaireC.value
+    };
+try{
+    await modifierC( id, candidatModifie)
+
+    modal.classList.add('hidden');
+    await afficherShortlist()
+     candidatAModifier = null;
+        id = null;
+
+
+}catch(error){
+    console.log(error.message);
+
+}
+ })
+ annulerM.addEventListener('click' ,function(){
+    modal.classList.add('hidden');
+ })
+annulerSuppression.addEventListener('click' , async function(){
+   modalSuppression.classList.add('hidden');
+ 
+
+ })
+ confirmerSuppression.addEventListener('click',async()=>{
+    console.log('suppreme')
+ try {
+        console.log('suppreme');
+
+        await deletC(idASup);
+
+        modalSuppression.classList.add('hidden');
+
+        await afficherShortlist();
+
+        idASup = null;
+
+    } catch(error) {
+        console.log(error.message);
+    }
+    //   const condidtsup=candidats.filter((c)=> c.id!==id )
+    //   afficherShortlist(condidtsup)
+    //   deletC(idASup)
+ })
+
